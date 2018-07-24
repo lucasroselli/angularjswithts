@@ -24,11 +24,11 @@ export default class MainCtrl {
 
 
 
-        $http.get('http://www.omdbapi.com/?i=tt2975590&apikey=18693fd6').then(function (data: IHttpResponse<OmdbSearch>) {
+        // $http.get('http://www.omdbapi.com/?i=tt2975590&apikey=18693fd6').then(function (data: IHttpResponse<OmdbSearch>) {
 
-            $scope.msg = data.data.Title;
-            console.log(data.data.Title);
-        });
+        //     $scope.msg = data.data.Title;
+        //     console.log(data.data.Title);
+        // });
 
         $http.get('http://www.omdbapi.com/?s=batman&apikey=18693fd6').then(function (response: IHttpResponse<OmdbResponseAll>) {
 
