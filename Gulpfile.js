@@ -7,7 +7,7 @@ let gulp = require('gulp'),
     var ts = require("gulp-typescript");
 var tsProject = ts.createProject("tsconfig.json");
     
-const vendors = ['angular', 'jquery'];
+const vendors = ['angular','angular-route', 'jquery'];
 
 gulp.task("build:type", function () {
     return tsProject.src()
