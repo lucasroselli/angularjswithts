@@ -8,12 +8,13 @@ app.config(function () {
     //alert('sdf');
 });
 
+
+import omdbService from './services/omdbService'
+app.service('omdbService', omdbService)
+
 import mainCtrl from './controllers/mainCtrl'
 app.controller('mainCtrl', mainCtrl);
 
-import omdbService from './services/omdbService'
-
-app.service('omdb', omdbService)
 
 $(document).ready(function () {
     //alert('lucas');

@@ -1,4 +1,5 @@
 import { IHttpResponse } from "../../node_modules/@types/angular";
+import OmdbService from "../services/omdbService";
 
 export interface mainCtrlScope extends ng.IScope {
     submitForm: () => void;
@@ -19,8 +20,13 @@ class OmdbSearch{
 
 export default class MainCtrl {
 
-    constructor($scope: any, $http: ng.IHttpService) {
-        $scope.msg = 'jonas';
+    // static $inject = [
+    //     '$scope',
+    //     "$http",
+    // ];
+
+    constructor($scope: any, $http: ng.IHttpService, omdbService: OmdbService) {
+        $scope.msg = omdbService.getMessage();
 
 
 
