@@ -9,8 +9,8 @@ app.config(function () {
 });
 
 
-import omdbService from './services/omdbService'
-app.service('omdbService', omdbService)
+import {OmdbService} from './services/omdbService'
+app.service('omdbService', OmdbService)
 
 import mainCtrl from './controllers/mainCtrl'
 app.controller('mainCtrl', mainCtrl);

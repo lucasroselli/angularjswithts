@@ -1,56 +1,44 @@
-import { IHttpResponse } from "../../node_modules/@types/angular";
-import OmdbService from "../services/omdbService";
+import { OmdbService, OmdbSearch } from "../services/omdbService";
 
 export interface mainCtrlScope extends ng.IScope {
-    submitForm: () => void;
-    myData: string;
+    msg: string;
+    filmes: [OmdbSearch]
+    umfilme: OmdbSearch
 };
 
-class OmdbResponseAll {
-    constructor(public totalResults: number,public Search: [OmdbSearch]) {
+export default class MainCtrl {
 
+    constructor($scope: mainCtrlScope,  omdbService: OmdbService) {
+        $scope.msg = omdbService.getMessage();        
+
+        omdbService.getFilmes('batman').then((respostaServidor) => {
+            $scope.filmes = respostaServidor.data.Search;
+
+            $scope.umfilme = this.FiltrarLego($scope.filmes);                
+        });        
+    }
+
+    public FiltrarLego(lFilmes: [OmdbSearch]): OmdbSearch {
+
+        var filme: OmdbSearch;
+
+        lFilmes.forEach(element => {
+            if (element.Title == "The Lego Batman Movie") {
+                filme = element;
+            }
+        });
+
+        return filme;
+    }
+
+    public getMessage22(): string {
+        return "Welcome! I am inside a service. today my friendss";
     }
 }
 
-class OmdbSearch{
-    public Title: string
-    public imdbID: number
-    public Poster: string
-}
 
-export default class MainCtrl {
 
     // static $inject = [
     //     '$scope',
     //     "$http",
     // ];
-
-    constructor($scope: any, $http: ng.IHttpService, omdbService: OmdbService) {
-        $scope.msg = omdbService.getMessage();
-
-
-
-        // $http.get('http://www.omdbapi.com/?i=tt2975590&apikey=18693fd6').then(function (data: IHttpResponse<OmdbSearch>) {
-
-        //     $scope.msg = data.data.Title;
-        //     console.log(data.data.Title);
-        // });
-
-        $http.get('http://www.omdbapi.com/?s=batman&apikey=18693fd6').then(function (response: IHttpResponse<OmdbResponseAll>) {
-
-        
-            console.log(response.data.totalResults);
-            console.log(response.data.Search);
-
-            $scope.filmes = response.data.Search;
-        });
-    }
-
-    // mensagem(nome: string) : number{
-    //     return nome.length;
-    // }
-
-    public getMessage(): string {
-        return "Welcome! I am inside a service. today my friendss";
-    }
-}
