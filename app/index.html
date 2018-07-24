@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appT">
+
+<head>
+    <title>My App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="js/vendor.js" charset="UTF-8"></script>
+    <script src="js/app.js" charset="UTF-8"></script>
+
+</head>
+
+<body>
+    {{1 + 1}}
+    <h1>Novo teste novo.</h1>
+
+
+    <div ng-controller="mainCtrl">
+        <span ng-bind="msg"></span>
+
+        <div>
+            <div ng-repeat="filme in filmes">
+                <img ng-src="{{filme.Poster}}" height="50" alt="" />
+                <label for="" ng-bind="filme.Title"></label>
+
+            </div>
+        </div>
+    </div>
+
+    <form ng-submit="submitForm()">
+        <button type="submit">Get Data</button>
+    </form>
+
+    <p ng-bind="myData"></p>
+
+
+
+    <input type="text" name="" value="" ng-model="myInput">
+    <p>{{ myInput }}</p>
+
+
+</body>
+
+</html>
