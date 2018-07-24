@@ -6,7 +6,8 @@ export class OmdbResponseAll {
 }
 
 export class OmdbSearch {
-    public Title: number
+    public Title: string
+    public imdbID: number
     public Poster: string
 }
 
