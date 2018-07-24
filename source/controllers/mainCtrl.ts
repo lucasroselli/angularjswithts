@@ -1,6 +1,6 @@
 import { OmdbService, OmdbSearch } from "../services/omdbService";
 
-export interface mainCtrlScope extends ng.IScope {
+interface mainCtrlScope extends ng.IScope {
     msg: string;
     filmes: [OmdbSearch]
     umfilme: OmdbSearch
@@ -8,13 +8,16 @@ export interface mainCtrlScope extends ng.IScope {
 
 export default class MainCtrl {
 
-    constructor($scope: mainCtrlScope,  omdbService: OmdbService) {
+    constructor(private $scope: mainCtrlScope,private omdbService: OmdbService) {
         $scope.msg = omdbService.getMessage();        
 
-        omdbService.getFilmes('batman').then((respostaServidor) => {
-            $scope.filmes = respostaServidor.data.Search;
+        this.CarregarTela();
+    }
 
-            $scope.umfilme = this.FiltrarLego($scope.filmes);                
+    private CarregarTela(){
+        this.omdbService.getFilmes('batman').then((respostaServidor) => {            
+            this.$scope.filmes = respostaServidor.data.Search;
+            this.$scope.umfilme = this.FiltrarLego(this.$scope.filmes);                
         });        
     }
 

@@ -18,7 +18,7 @@ export class OmdbService {
     }
 
     public getMessage(): string {
-        return "Mensagem do serviço OmdbService";
+        return "Bem vindo OmdbService";
     }
 
     public getFilmes(filtro: string): angular.IPromise<IHttpResponse<OmdbResponseAll>> {
