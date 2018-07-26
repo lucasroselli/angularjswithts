@@ -5,42 +5,29 @@ import * as $ from 'jquery'
 let app = angular.module('appT', ['ngRoute']);
 
 
-app.config(function ($routeProvider: ng.route.IRouteProvider) {
+import mainCtrl from './controllers/mainCtrl'
+import SobreCtrl from './controllers/sobreCtrl'
+import { OmdbService } from './services/omdbService'
 
+app.service('omdbService', OmdbService)
+app.controller('mainCtrl', mainCtrl);
+app.controller('sobreCtrl', SobreCtrl);
 
+app.config(['$routeProvider',function ($routeProvider: ng.route.IRouteProvider) {
     var sdfds =angularRoute;
 
     $routeProvider
-    .when('', {
-        templateUrl: '<h2>dfsdfs</h2>',
-        controller: 'mainCtrl'
+    .when('/', {
+        template: mainCtrl.Temp(),
+        controller: 'mainCtrl',
+        controllerAs: 'vm'
     })
     .when('/sobre', {
-        templateUrl: '<h2>sobre</h2>',
-        controller: 'mainCtrl'
+        template: SobreCtrl.Temp(),
+        controller: 'sobreCtrl'
     })
-    .otherwise('/')
-
-    // //alert('sdf');
-    // $routeProvider
-    //     .when('/Book/:bookId', {
-    //         templateUrl: 'book.html',
-    //         controller: 'BookController'
-    //     })
-    //     .when('/Book/:bookId/ch/:chapterId', {
-    //         templateUrl: 'chapter.html',
-    //         controller: 'ChapterController'
-    //     });
-
-});
-
-
-import { OmdbService } from './services/omdbService'
-app.service('omdbService', OmdbService)
-
-import mainCtrl from './controllers/mainCtrl'
-app.controller('mainCtrl', mainCtrl);
-
+    .otherwise('/');
+}]);
 
 $(document).ready(function () {
     //alert('lucas');

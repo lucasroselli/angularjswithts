@@ -2,41 +2,33 @@
 <html lang="en" ng-app="appT">
 
 <head>
-    <title>My App</title>
+    <title>Angular JS com TypeScript - Projeto Argo MVP</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
     <script src="js/vendor.js" charset="UTF-8"></script>
     <script src="js/app.js" charset="UTF-8"></script>
 
 </head>
 
-<body>    
-    <h1>Angular JS com TypeScript ROdirgao.</h1>
-    <div ng-controller="mainCtrl">
-        <span ng-bind="msg"></span>
+<body>
+    <div class="container">
+        <h1>Angular JS com TypeScript - Projeto Argo MVP.</h1>
 
-        <div>
-            <div ng-repeat="filme in filmes">
-                <img ng-src="{{filme.Poster}}" height="50" alt="" />
-                <label for="" ng-bind="filme.Title"></label>
+        <ul class="nav">
+            <li class="nav-item">
 
-            </div>
-        </div>
+                <a href="#!/" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="#!/sobre" class="nav-link">Sobre</a>
+            </li>
+        </ul>
+        
+
+        <div ng-view></div>
     </div>
-
-    <form ng-submit="submitForm()">
-        <button type="submit">Get Data</button>
-    </form>
-
-    <p ng-bind="myData"></p>
-
-
-
-    <input type="text" name="" value="" ng-model="myInput">
-    <p>{{ myInput }}</p>
-
-
 </body>
 
 </html>
