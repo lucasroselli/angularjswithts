@@ -6,7 +6,7 @@ interface mainCtrlScope extends ng.IScope {
     umfilme: OmdbSearch;
 };
 
-export default class MainCtrl {
+export default class MainCtrl implements ng.IController {
 
     static $inject = [
         '$scope',
@@ -15,16 +15,18 @@ export default class MainCtrl {
 
     private $scope: mainCtrlScope;
 
-    constructor($scope: mainCtrlScope, private omdbService: OmdbService) {        
+    constructor($scope: mainCtrlScope, private omdbService: OmdbService) {
         this.$scope = $scope;
         this.$scope.msg = '';
+
+        this.omdbService.testAsync();
     }
 
-    public submitForm() : void{        
+    public submitForm(): void {
         this.CarregarTela(this.$scope.msg);
     }
 
-    private CarregarTela(texto: string) : void {
+    private CarregarTela(texto: string): void {
         this.omdbService.getFilmes(texto).then((respostaServidor) => {
             this.$scope.filmes = respostaServidor.data.Search;
             this.$scope.umfilme = this.FiltrarLego(this.$scope.filmes);
@@ -34,6 +36,10 @@ export default class MainCtrl {
     public FiltrarLego(lFilmes: [OmdbSearch]): OmdbSearch {
 
         var filme: OmdbSearch;
+
+        if (!lFilmes || lFilmes.length <= 0) {
+            return filme;
+        }
 
         lFilmes.forEach(element => {
             if (element.Title == "The Lego Batman Movie") {
@@ -59,10 +65,13 @@ export default class MainCtrl {
       </form>
 
         <div class="list-group">
-            <div ng-repeat="filme in filmes" class="list-group-item">
+            <div ng-repeat="filme in filmes" class="list-group-item list-group-item-action">
                 <img ng-src="{{filme.Poster}}" height="100" alt="" />
                 <label for="" ng-bind="filme.Title"></label>
 
+            </div>
+            <div class="list-group-item list-group-item-dark" ng-if="!filmes || filmes.length == 0">
+                Nenhum resultado encontrado
             </div>
         </div>
     `;

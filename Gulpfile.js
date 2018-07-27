@@ -9,9 +9,18 @@ var tsProject = ts.createProject("tsconfig.json");
     
 const vendors = ['angular','angular-route', 'jquery'];
 
+function swallowError (error) {
+
+    // If you want details of the error in the console
+    console.log(error.toString())
+  
+    this.emit('end')
+  }
+
 gulp.task("build:type", function () {
     return tsProject.src()
         .pipe(tsProject())
+        .on('error',swallowError)
         .js.pipe(gulp.dest(tsProject.config.compilerOptions.outDir));
 });
 
