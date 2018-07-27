@@ -3,13 +3,15 @@ export default class HttpMediator implements ng.IHttpInterceptor {
     }
     request = (config: ng.IRequestConfig): ng.IRequestConfig => {
         console.info('Request:', config);
-        
+        document.getElementById('global_loading').style.display = 'block';
         return config;
     };
     
     response = <T>(response: ng.IHttpPromiseCallbackArg<T>): ng.IHttpResponse<T> => {
         console.info('Response:', response);
         
+        document.getElementById('global_loading').style.display = 'none';
+
         return response;
     };
 
